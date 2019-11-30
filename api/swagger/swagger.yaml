@@ -1,0 +1,1060 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Pedas App
+# during dev, should point to your local machine
+
+#host: 
+host: localhost:10010
+
+x-google-endpoints:
+#- name: ''
+- name: 'localhost:10010'
+  allowCors: 'true'
+# basePath prefixes all resource paths
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+
+  /usuarios:
+    x-swagger-router-controller: usuario.controller
+    get:
+      description: get the user list
+      parameters:
+        - name: nombre
+          in: query
+          type: string
+          required: false
+        - name: edad
+          in: query
+          type: string
+          required: false
+        - name: genero
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+      operationId: getUsuario
+      responses: 
+        "200":
+          description: success
+          schema: 
+            $ref: "#/definitions/GetUsuarioListResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: Add a new user to the list
+      parameters:
+        - in: body
+          name: usuario
+          description: The user to create
+          schema:
+            $ref: "#/definitions/Usuario"
+      operationId: createUsuario
+      responses: 
+        "201":
+          description: success
+          schema:
+            $ref: "#/definitions/GetUsuarioResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+  
+  /usuarios/{id}:
+    x-swagger-router-controller: usuario.controller
+    
+    get: 
+      description: Get an user
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getUsuarioById
+      responses:
+        "200":
+          description: success
+          schema:
+           $ref: "#/definitions/GetUsuarioResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update an user
+      parameters:
+        - name: id
+          description: User id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: usuario
+          description: The user to update
+          schema:
+            $ref: "#/definitions/Usuario"
+      operationId: updateUsuario
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUsuarioResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: Delete an user
+      parameters:
+        - name: id
+          description: User id
+          type: string
+          in: path 
+          required: true
+      operationId: deleteUsuario
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /pedas:
+    x-swagger-router-controller: peda.controller
+    get:
+      description: get the peda list
+      parameters:
+        - name: horario
+          in: query
+          type: string
+          required: false
+        - name: cantidad
+          in: query
+          type: string
+          required: false
+        - name: presupuesto
+          in: query
+          type: string
+          required: false
+        - name: host
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+        - name: fields
+          in: query  
+          type: string
+          required: false
+      operationId: getPeda
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetPedaListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new peda to the list
+      parameters:
+        - in: body
+          name: peda
+          description: The peda to create.
+          schema:
+            $ref: "#/definitions/Peda"
+      operationId: createPeda
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetPedaResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /pedas/{id}:
+    x-swagger-router-controller: peda.controller
+    
+    get:
+      description: get a peda
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getPedaById
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetPedaResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: update a peda
+      parameters:
+        - name: id
+          description: peda id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: peda
+          description: The peda to update.
+          schema:
+            $ref: "#/definitions/Peda"
+      operationId: updatePeda
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetPedaResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+            
+    delete:
+      description: delete a alcohol
+      parameters:
+        - name: id
+          description: alcohol id
+          type: string
+          in: path
+          required: true
+      operationId: deletePeda
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"   
+            
+  /hosts:
+    x-swagger-router-controller: host.controller
+
+    get:
+      description: get the host list
+      parameters:
+        - name: nombre
+          in: query
+          type: string
+          required: false
+        - name: direccion
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+      operationId: getHost
+      responses: 
+        "200":
+          description: success
+          schema: 
+            $ref: "#/definitions/GetHostListResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: Add a new host to the list
+      parameters:
+        - in: body
+          name: host
+          description: The host to create
+          schema:
+            $ref: "#/definitions/Host"
+      operationId: createHost
+      responses: 
+        "201":
+          description: success
+          schema:
+            $ref: "#/definitions/GetHostResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+  
+  /hosts/{id}:
+    x-swagger-router-controller: host.controller
+    
+    get: 
+      description: Get a host
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getHostById
+      responses:
+        "200":
+          description: success
+          schema:
+           $ref: "#/definitions/GetHostResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update a host
+      parameters:
+        - name: id
+          description: Host id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: host
+          description: The host to update
+          schema:
+            $ref: "#/definitions/Host"
+      operationId: updateHost
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetHostResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: Delete a host
+      parameters:
+        - name: id
+          description: Host id
+          type: string
+          in: path 
+          required: true
+      operationId: deleteHost
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /alcoholes:
+    x-swagger-router-controller: alcohol.controller
+
+    get:
+      description: get the alcohol list
+      parameters:
+        - name: nombre
+          in: query
+          type: string
+          required: false
+        - name: tipo
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+      operationId: getAlcohol
+      responses: 
+        "200":
+          description: success
+          schema: 
+            $ref: "#/definitions/GetAlcoholListResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: Add a new alcohol to the list
+      parameters:
+        - in: body
+          name: alcohol
+          description: The alcohol to create
+          schema:
+            $ref: "#/definitions/Alcohol"
+      operationId: createAlcohol
+      responses: 
+        "201":
+          description: success
+          schema:
+            $ref: "#/definitions/GetAlcoholResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+  
+  /alcoholes/{id}:
+    x-swagger-router-controller: alcohol.controller
+    
+    get: 
+      description: Get an alcohol
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getAlcoholById
+      responses:
+        "200":
+          description: success
+          schema:
+           $ref: "#/definitions/GetAlcoholResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update an alcohol
+      parameters:
+        - name: id
+          description: Alcohol id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: alcohol
+          description: The alcohol to update
+          schema:
+            $ref: "#/definitions/Alcohol"
+      operationId: updateAlcohol
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetAlcoholResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: Delete an alcohol
+      parameters:
+        - name: id
+          description: Alcohol id
+          type: string
+          in: path 
+          required: true
+      operationId: deleteAlcohol
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+  /usuariopedas:
+    x-swagger-router-controller: usuariopedas.controller
+
+    get:
+      description: get the usuariopedas list
+      parameters:
+        - name: usuario
+          in: query
+          type: number
+          required: false
+        - name: peda
+          in: query
+          type: number
+          required: false
+        - name: calificacion
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+      operationId: getUsuariopedas
+      responses: 
+        "200":
+          description: success
+          schema: 
+            $ref: "#/definitions/GetUsuarioPedasListResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: Add a new usuariopedas to the list
+      parameters:
+        - in: body
+          name: usuariopedas
+          description: The usuariopedas to create
+          schema:
+            $ref: "#/definitions/UsuarioPedas"
+      operationId: createUsuariopedas
+      responses: 
+        "201":
+          description: success
+          schema:
+            $ref: "#/definitions/GetUsuarioPedasResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+  
+  /usuariopedas/{id}:
+    x-swagger-router-controller: usuariopedas.controller
+    
+    get: 
+      description: Get an usuariopedas
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getUsuariopedasById
+      responses:
+        "200":
+          description: success
+          schema:
+           $ref: "#/definitions/GetUsuarioPedasResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update an usuariopedas
+      parameters:
+        - name: id
+          description: Usuariopedas id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: usuariopedas
+          description: The usuariopedas to update
+          schema:
+            $ref: "#/definitions/UsuarioPedas"
+      operationId: updateUsuariopedas
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUsuarioPedasResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: Delete an usuariopedas
+      parameters:
+        - name: id
+          description: Usuariopedas id
+          type: string
+          in: path 
+          required: true
+      operationId: deleteUsuariopedas
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /hostpedas:
+    x-swagger-router-controller: hostpedas.controller
+
+    get:
+      description: get the hostpedas list
+      parameters:
+        - name: host
+          in: query
+          type: number
+          required: false
+        - name: peda
+          in: query
+          type: number
+          required: false
+        - name: calificacion
+          in: query
+          type: string
+          required: false
+        - name: sort
+          in: query
+          type: string
+          required: false
+      operationId: getHostpedas
+      responses: 
+        "200":
+          description: success
+          schema: 
+            $ref: "#/definitions/GetHostPedasListResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: Add a new hostpedas to the list
+      parameters:
+        - in: body
+          name: hostpedas
+          description: The hostpedas to create
+          schema:
+            $ref: "#/definitions/HostPedas"
+      operationId: createHostpedas
+      responses: 
+        "201":
+          description: success
+          schema:
+            $ref: "#/definitions/GetHostPedasResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+  
+  /hostpedas/{id}:
+    x-swagger-router-controller: hostpedas.controller
+    
+    get: 
+      description: Get a hostpedas
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      operationId: getHostpedasById
+      responses:
+        "200":
+          description: success
+          schema:
+           $ref: "#/definitions/GetHostPedasResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update a hostpedas
+      parameters:
+        - name: id
+          description: Hostpedas id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: hostpedas
+          description: The hostpedas to update
+          schema:
+            $ref: "#/definitions/HostPedas"
+      operationId: updateHostpedas
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetHostPedasResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: Delete a hostpedas
+      parameters:
+        - name: id
+          description: Hostpedas id
+          type: string
+          in: path 
+          required: true
+      operationId: deleteHostpedas
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+    
+# complex objects have schema definitions
+definitions:
+      
+  Usuario:
+    type: object
+    properties:
+      nombre:
+        type: string
+        description: Name of the user
+      edad:
+        type: string
+        description: Age of the user
+      genero:
+        type: string
+        description: Genre of the user
+      image:
+        type: string
+        format: byte
+    required:
+      - nombre
+      - edad
+      - genero
+    
+  GetUsuarioResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      nombre:
+        type: string
+        description: Name of the user
+      edad:
+        type: string
+        description: Age of the user
+      genero:
+        type: string
+        description: Genre of the user
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - nombre
+      - edad
+      - genero
+      
+  GetUsuarioListResponse:
+    required: 
+      - usuarios
+    properties: 
+      usuarios:
+        type: array
+        items:
+          $ref: "#/definitions/GetUsuarioResponse"
+
+  Peda:
+    type: object
+    properties:
+      horario:
+        type: string
+        description: Datetime of the peda
+      cantidad:
+        type: string
+        description: Amount of assitance of the peda
+      presupuesto:
+        type: string
+        description: Budget of the peda
+      host:
+        type: string
+        description: Host of the peda
+      image:
+        type: string
+        format: byte
+    required:
+      - horario
+      - cantidad
+      - presupuesto
+      - host
+      
+  GetPedaResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      horario:
+        type: string
+        description: Datetime of the peda
+      cantidad:
+        type: string
+        description: Amount of assitance of the peda
+      presupuesto:
+        type: string
+        description: Budget of the peda
+      host:
+        type: string
+        description: Host of the peda
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - horario
+      - cantidad
+      - presupuesto
+      - host
+      
+  GetPedaListResponse:
+    required:
+      - pedas
+    properties:
+      pedas:
+        type: array
+        items:
+          $ref: "#/definitions/GetPedaResponse"  
+
+  Host:
+    type: object
+    properties:
+      nombre:
+        type: string
+        description: Name of the host
+      direccion:
+        type: string
+        description: Address of the host
+      image:
+        type: string
+        format: byte
+    required:
+      - nombre
+      - direccion
+    
+  GetHostResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      nombre:
+        type: string
+        description: Name of the host
+      direccion:
+        type: string
+        description: Address of the host
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - nombre
+      - direccion
+
+  GetHostListResponse:
+    required: 
+      - hosts
+    properties: 
+      hosts:
+        type: array
+        items:
+          $ref: "#/definitions/GetHostResponse"
+  
+  Alcohol:
+    type: object
+    properties:
+      nombre:
+        type: string
+        description: Name of the alcohol
+      tipo:
+        type: string
+        description: Type of the alcohol
+      image:
+        type: string
+        format: byte
+    required:
+      - nombre
+      - tipo
+    
+  GetAlcoholResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      nombre:
+        type: string
+        description: Name of the alcohol
+      tipo:
+        type: string
+        description: Type of the alcohol
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - nombre
+      - tipo
+      
+  GetAlcoholListResponse:
+    required: 
+      - alcoholes
+    properties: 
+      alcoholes:
+        type: array
+        items:
+          $ref: "#/definitions/GetAlcoholResponse"
+
+  UsuarioPedas:
+    type: object
+    properties:
+      usuario:
+        type: number
+        description: usuario
+      peda:
+        type: number
+        description: peda
+      calificacion:
+        type: string
+        description: calificacion
+      image:
+        type: string
+        format: byte
+    required:
+      - usuario
+      - peda
+      - calificacion
+    
+  GetUsuarioPedasResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      usuario:
+        type: number
+        description: usuario
+      peda:
+        type: number
+        description: peda
+      calificacion:
+        type: string
+        description: calificacion
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - usuario
+      - peda
+      - calificacion
+      
+  GetUsuarioPedasListResponse:
+    required: 
+      - usuariopedas
+    properties: 
+      usuariopedas:
+        type: array
+        items:
+          $ref: "#/definitions/GetUsuarioPedasResponse"
+
+  HostPedas:
+    type: object
+    properties:
+      host:
+        type: number
+        description: host
+      peda:
+        type: number
+        description: peda
+      calificacion:
+        type: string
+        description: calificacion
+      image:
+        type: string
+        format: byte
+    required:
+      - host
+      - peda
+      - calificacion
+    
+  GetHostPedasResponse:
+    type: object
+    properties:
+      id:
+        type: number
+        description: identifier
+      host:
+        type: number
+        description: host
+      peda:
+        type: number
+        description: peda
+      calificacion:
+        type: string
+        description: calificacion
+      image:
+        type: string
+        format: byte
+    required:
+      - id
+      - host
+      - peda
+      - calificacion
+      
+  GetHostPedasListResponse:
+    required: 
+      - hostpedas
+    properties: 
+      hostpedas:
+        type: array
+        items:
+          $ref: "#/definitions/GetHostPedasResponse"
+
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: Returns 1 if successful
+      description:
+        type: string
+        description: A short comment
+    required:
+      - success
+      - description
+  
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+      description:
+        type: string
