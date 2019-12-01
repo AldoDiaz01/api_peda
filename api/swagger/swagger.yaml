@@ -4,11 +4,11 @@ info:
   title: Pedas App
 # during dev, should point to your local machine
 
-host: sigmaapp-257213.appspot.com
+host: mipeda.appspot.com
 #host: localhost:10010
 
 x-google-endpoints:
-- name: 'sigmaapp-257213.appspot.com'
+- name: 'mipeda.appspot.com'
 #- name: 'localhost:10010'
   allowCors: 'true'
 # basePath prefixes all resource paths
