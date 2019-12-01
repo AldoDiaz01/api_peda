@@ -160,7 +160,7 @@ paths:
           required: false
         - name: host
           in: query
-          type: string
+          type: number
           required: false
         - name: sort
           in: query
@@ -791,7 +791,7 @@ definitions:
         type: string
         description: Budget of the peda
       host:
-        type: string
+        type: number
         description: Host of the peda
       image:
         type: string
@@ -818,7 +818,7 @@ definitions:
         type: string
         description: Budget of the peda
       host:
-        type: string
+        type: number
         description: Host of the peda
       image:
         type: string
