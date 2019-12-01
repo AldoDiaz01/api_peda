@@ -3,7 +3,7 @@
     "username": "master",
     "password": "wevos1",
     "database": "Api_pedas",
-    "host": "35.193.76.140",
+    "host": "35.184.67.139",
     "dialect": "postgres",
     "operatorsAliases": false
   },
@@ -11,7 +11,7 @@
     "username": "master",
     "password": "wevos1",
     "database": "Api_pedas",
-    "host": "35.193.76.140",
+    "host": "35.184.67.139",
     "dialect": "postgres",
     "operatorsAliases": false
   },
@@ -19,7 +19,7 @@
     "username": "master",
     "password": "wevos1",
     "database": "Api_pedas",
-    "host": "35.193.76.140",
+    "host": "35.184.67.139",
     "dialect": "postgres",
     "operatorsAliases": false
   }
