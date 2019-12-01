@@ -1,25 +1,25 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "z1123581321",
+    "username": "master",
+    "password": "wevos1",
     "database": "Api_pedas",
-    "host": "127.0.0.1",
+    "host": "34.70.72.82",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "postgres",
-    "password": "z1123581321",
+    "username": "master",
+    "password": "wevos1",
     "database": "Api_pedas",
-    "host": "127.0.0.1",
+    "host": "34.70.72.82",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "postgres",
-    "password": "z1123581321",
+    "username": "master",
+    "password": "wevos1",
     "database": "Api_pedas",
-    "host": "127.0.0.1",
+    "host": "34.70.72.82",
     "dialect": "postgres",
     "operatorsAliases": false
   }

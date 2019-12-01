@@ -4,12 +4,12 @@ info:
   title: Pedas App
 # during dev, should point to your local machine
 
-#host: 
-host: localhost:10010
+host: mi-peda000.appspot.com
+#host: localhost:10010
 
 x-google-endpoints:
-#- name: ''
-- name: 'localhost:10010'
+- name: 'mi-peda000.appspot.com'
+#- name: 'localhost:10010'
   allowCors: 'true'
 # basePath prefixes all resource paths
 basePath: /
