@@ -3,7 +3,7 @@ env: flex
 manual_scaling:
   instances: 1
 readiness_check:
-  app_start_timeout_sec: 1000
+  app_start_timeout_sec: 1800
 resources:
   cpu: 1
   memory_gb: 1.7
