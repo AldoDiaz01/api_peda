@@ -36,9 +36,11 @@ function createUsuario(req, res) {
         var parameters = req.body;
 
         return Usuarios.create({
+            usuario: parameters.usuario,
+            contasena: parameters.contrasena,
             nombre: parameters.nombre,
             edad: parameters.edad,
-            genero: parameters.genero
+            telefono: parameters.telefono
         }).then(usuario => res.status(201).send(usuario))
             .catch(error => res.status(400).send(error));
 
@@ -100,9 +102,11 @@ function updateUsuario(req, res) {
                 res.status(401).send(({}));
             }
             return usuario.update({
+                usuario: parameters.usuario,
+                contasena: parameters.contrasena,
                 nombre: parameters.nombre,
                 edad: parameters.edad,
-                genero: parameters.genero
+                telefono: parameters.telefono
             }).then(() => res.status(200).send(usuario))
                 .catch(error => res.status(403).send(usuario));
         }).catch(error => console.log("There was an error: " + error));

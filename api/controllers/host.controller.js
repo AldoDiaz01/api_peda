@@ -36,8 +36,12 @@ function createHost(req, res) {
         var parameters = req.body;
 
         return Hosts.create({
-            nombre: parameters.nombre,
-            direccion: parameters.direccion
+                usuario: parameters.usuario,
+                contasena: parameters.contrasena,
+                nombre: parameters.nombre,
+                edad: parameters.edad,
+                telefono: parameters.telefono,
+                direccion: parameters.direccion
         }).then(host => res.status(201).send(host))
             .catch(error => res.status(400).send(error));
 
@@ -99,7 +103,11 @@ function updateHost(req, res) {
                 res.status(401).send(({}));
             }
             return host.update({
+                usuario: parameters.usuario,
+                contasena: parameters.contrasena,
                 nombre: parameters.nombre,
+                edad: parameters.edad,
+                telefono: parameters.telefono,
                 direccion: parameters.direccion
             }).then(() => res.status(200).send(host))
                 .catch(error => res.status(403).send(host));

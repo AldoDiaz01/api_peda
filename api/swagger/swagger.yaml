@@ -4,12 +4,12 @@ info:
   title: Pedas App
 # during dev, should point to your local machine
 
-host: mipeda.appspot.com
-#host: localhost:10010
+#host: mipeda.appspot.com
+host: localhost:10010
 
 x-google-endpoints:
-- name: 'mipeda.appspot.com'
-#- name: 'localhost:10010'
+#- name: 'mipeda.appspot.com'
+- name: 'localhost:10010'
   allowCors: 'true'
 # basePath prefixes all resource paths
 basePath: /
@@ -31,6 +31,14 @@ paths:
     get:
       description: get the user list
       parameters:
+        - name: usuario
+          in: query
+          type: string
+          required: false
+        - name: contrasena
+          in: query
+          type: string
+          required: false
         - name: nombre
           in: query
           type: string
@@ -39,7 +47,7 @@ paths:
           in: query
           type: string
           required: false
-        - name: genero
+        - name: telefono
           in: query
           type: string
           required: false
@@ -269,7 +277,23 @@ paths:
     get:
       description: get the host list
       parameters:
+        - name: host
+          in: query
+          type: string
+          required: false
+        - name: contrasena
+          in: query
+          type: string
+          required: false
         - name: nombre
+          in: query
+          type: string
+          required: false
+        - name: edad
+          in: query
+          type: string
+          required: false
+        - name: telefono
           in: query
           type: string
           required: false
@@ -728,22 +752,30 @@ definitions:
   Usuario:
     type: object
     properties:
+      usuario:
+        type: string
+        description: User of the user
+      contrasena:
+        type: string
+        description: Password of the user
       nombre:
         type: string
         description: Name of the user
       edad:
         type: string
         description: Age of the user
-      genero:
+      telefono:
         type: string
-        description: Genre of the user
+        description: Phone of the user
       image:
         type: string
         format: byte
     required:
+      - usuario
+      - contrasena
       - nombre
       - edad
-      - genero
+      - telefono
     
   GetUsuarioResponse:
     type: object
@@ -751,23 +783,31 @@ definitions:
       id:
         type: number
         description: identifier
+      usuario:
+        type: string
+        description: User of the user
+      contrasena:
+        type: string
+        description: Password of the user
       nombre:
         type: string
         description: Name of the user
       edad:
         type: string
         description: Age of the user
-      genero:
+      telefono:
         type: string
-        description: Genre of the user
+        description: Phone of the user
       image:
         type: string
         format: byte
     required:
       - id
+      - usuario
+      - contrasena
       - nombre
       - edad
-      - genero
+      - telefono
       
   GetUsuarioListResponse:
     required: 
@@ -842,9 +882,21 @@ definitions:
   Host:
     type: object
     properties:
+      usuario:
+        type: string
+        description: Name of the user of the host
+      contrasena:
+        type: string
+        description: Password of the host
       nombre:
         type: string
         description: Name of the host
+      edad:
+        type: string
+        description: Age of the host
+      telefono:
+        type: string
+        description: Phone of the host
       direccion:
         type: string
         description: Address of the host
@@ -852,7 +904,11 @@ definitions:
         type: string
         format: byte
     required:
+      - usuario
+      - contrasena
       - nombre
+      - edad
+      - telefono
       - direccion
     
   GetHostResponse:
@@ -861,9 +917,21 @@ definitions:
       id:
         type: number
         description: identifier
+      usuario:
+        type: string
+        description: User of the host
+      contrasena:
+        type: string
+        description: Password of the host
       nombre:
         type: string
         description: Name of the host
+      edad:
+        type: string
+        description: Age of the host
+      telefono:
+        type: string
+        description: Phone of the host
       direccion:
         type: string
         description: Address of the host
@@ -872,7 +940,11 @@ definitions:
         format: byte
     required:
       - id
+      - usuario
+      - contrasena
       - nombre
+      - edad
+      - telefono
       - direccion
 
   GetHostListResponse:
