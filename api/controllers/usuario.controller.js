@@ -37,7 +37,7 @@ function createUsuario(req, res) {
 
         return Usuarios.create({
             usuario: parameters.usuario,
-            contasena: parameters.contrasena,
+            contrasena: parameters.contrasena,
             nombre: parameters.nombre,
             edad: parameters.edad,
             telefono: parameters.telefono
@@ -103,7 +103,7 @@ function updateUsuario(req, res) {
             }
             return usuario.update({
                 usuario: parameters.usuario,
-                contasena: parameters.contrasena,
+                contrasena: parameters.contrasena,
                 nombre: parameters.nombre,
                 edad: parameters.edad,
                 telefono: parameters.telefono

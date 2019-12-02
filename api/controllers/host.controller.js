@@ -37,7 +37,7 @@ function createHost(req, res) {
 
         return Hosts.create({
                 usuario: parameters.usuario,
-                contasena: parameters.contrasena,
+                contrasena: parameters.contrasena,
                 nombre: parameters.nombre,
                 edad: parameters.edad,
                 telefono: parameters.telefono,
@@ -104,7 +104,7 @@ function updateHost(req, res) {
             }
             return host.update({
                 usuario: parameters.usuario,
-                contasena: parameters.contrasena,
+                contrasena: parameters.contrasena,
                 nombre: parameters.nombre,
                 edad: parameters.edad,
                 telefono: parameters.telefono,
